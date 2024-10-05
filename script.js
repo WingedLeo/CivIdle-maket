@@ -3,7 +3,7 @@ const gameBoard = document.getElementById("game-board");
 const versionDisplay = document.getElementById("version");
 
 // Установите версию проекта
-const version = "1.0.3";
+const version = "1.0.4";
 versionDisplay.textContent = `Версия: ${version}`; // Отображение версии
 
 // Мока объектов игры (вы можете заменить их реальными данными)
@@ -18,25 +18,10 @@ function createHexagon(xy) {
     hex.setAttribute("data-xy", xy); // Хранение координат плитки
 
     hex.addEventListener("click", () => {
-        if (!hex.classList.contains("explored")) {
-            exploreTile(xy);
-        }
         hex.classList.toggle("selected"); // Переключение класса для выделения
     });
 
     return hex;
-}
-
-// Функция для исследования плитки
-function exploreTile(xy) {
-    const tile = gameState.tiles.get(xy);
-    if (tile) {
-        tile.explored = true; // Помечаем плитку как исследованную
-        const hex = document.querySelector(`.hex[data-xy="${xy}"]`);
-        if (hex) {
-            hex.classList.add("explored"); // Добавление класса для изменения цвета
-        }
-    }
 }
 
 // Создание карты 50x50
