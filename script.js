@@ -1,4 +1,9 @@
 const gameBoard = document.getElementById("game-board");
+const versionDisplay = document.getElementById("version");
+
+// Установите версию проекта
+const version = "1.0.0";
+versionDisplay.textContent = `Версия: ${version}`; // Отображение версии
 
 // Функция для создания шестиугольников
 function createHexagon(row, col) {
