@@ -7,20 +7,26 @@ body {
 }
 
 #game-board {
-    display: grid;
-    grid-template-columns: repeat(50, 1fr); /* 50 колонок */
+    display: flex;
+    flex-wrap: wrap; /* Используем flex для обёртки */
     width: 100%;
     max-width: 800px; /* Максимальная ширина для отображения */
+    position: relative;
 }
 
 .hex {
     width: 100px; /* Ширина шестиугольника */
-    height: 57.74px; /* Высота шестиугольника (вычислено из ширины) */
+    height: 57.74px; /* Высота шестиугольника */
     background-color: #007bff; /* Цвет шестиугольника */
-    margin: 1px; /* Отступы */
+    margin: 1px 0; /* Вертикальный отступ */
     cursor: pointer;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); /* Правильная форма шестиугольника */
     transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+/* Смещение каждого второго ряда */
+.hex:nth-child(odd) {
+    margin-left: 50px; /* Смещение для создания правильной сетки */
 }
 
 .hex.selected {
