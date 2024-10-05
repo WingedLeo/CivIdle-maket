@@ -15,10 +15,10 @@ body {
 
 .hex {
     position: relative;
-    width: 50px; /* Ширина шестиугольника */
-    height: 28.87px; /* Высота шестиугольника */
-    background-color: #007bff;
-    margin: 1px 0; /* Отступы для создания шестиугольной формы */
+    width: 100px; /* Ширина шестиугольника */
+    height: 57.74px; /* Высота шестиугольника */
+    background-color: #007bff; /* Цвет шестиугольника */
+    margin: 0 1px; /* Отступы для создания шестиугольной формы */
     cursor: pointer;
     transition: background-color 0.3s; /* Плавный переход цвета */
 }
@@ -28,18 +28,18 @@ body {
     content: '';
     position: absolute;
     width: 0;
-    border-left: 25px solid transparent; /* Левый треугольник */
-    border-right: 25px solid transparent; /* Правый треугольник */
+    border-left: 50px solid transparent; /* Левый треугольник */
+    border-right: 50px solid transparent; /* Правый треугольник */
 }
 
 .hex:before {
     bottom: 100%; /* Верхний треугольник */
-    border-bottom: 14.43px solid #007bff; /* Цвет шестиугольника */
+    border-bottom: 28.87px solid #007bff; /* Цвет шестиугольника */
 }
 
 .hex:after {
     top: 100%; /* Нижний треугольник */
-    border-top: 14.43px solid #007bff; /* Цвет шестиугольника */
+    border-top: 28.87px solid #007bff; /* Цвет шестиугольника */
 }
 
 .hex.selected {
