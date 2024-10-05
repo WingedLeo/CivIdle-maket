@@ -3,7 +3,7 @@ const gameBoard = document.getElementById("game-board");
 const versionDisplay = document.getElementById("version");
 
 // Установите версию проекта
-const version = "1.0.0";
+const version = "1.0.3";
 versionDisplay.textContent = `Версия: ${version}`; // Отображение версии
 
 // Мока объектов игры (вы можете заменить их реальными данными)
