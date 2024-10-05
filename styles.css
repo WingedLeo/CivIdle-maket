@@ -45,3 +45,7 @@ body {
 .hex.selected {
     background-color: #28a745; /* Цвет выделенного шестиугольника */
 }
+
+.hex.explored {
+    background-color: #ffc107; /* Цвет исследованного шестиугольника */
+}
