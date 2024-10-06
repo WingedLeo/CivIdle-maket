@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор производства</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Карта с шестиугольниками</title>
+    <script src="script.js" defer type="module"></script>
+    <script src="BuildingDefinitions.js" type="module"></script>
+
 </head>
 <body>
-    <h1>Карта с шестиугольниками</h1> <!-- Заголовок -->
-    <div id="game-board"></div>
-    <script type="module" src="script.js"></script>
+    <h1>Калькулятор зданий</h1>
+
+    <div>
+        <label for="building">Выберите здание:</label>
+        <select id="building">
+            <option value="">--Выберите здание--</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="level">Уровень здания:</label>
+        <input type="number" id="level" value="1">
+    </div>
+
+    <div>
+        <label for="quantity">Количество зданий:</label>
+        <input type="number" id="quantity" value="1">
+    </div>
+
+    <button id="calculate">Рассчитать</button>
+
+    <h2>Результаты</h2>
+    <div id="results"></div>
 </body>
 </html>

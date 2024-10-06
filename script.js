@@ -1,38 +1,54 @@
-// script.js
+import { BuildingDefinitions } from './dist/BuildingDefinitions.js';
+import { multiplyResources } from './dist/multiplyResources.js'; // Подключите файл с умножением ресурсов
 
-const gameBoard = document.getElementById("game-board");
+const buildingSelect = document.getElementById('building');
+const levelInput = document.getElementById('level');
+const quantityInput = document.getElementById('quantity');
+const resultsDiv = document.getElementById('results');
 
-// Размеры шестиугольников
-const hexSize = 50; // Размер шестиугольника
-const gridWidth = 10; // Ширина сетки (в шестиугольниках)
-const gridHeight = 10; // Высота сетки (в шестиугольниках)
+// Инициализация зданий
+const buildingDefs = new BuildingDefinitions();
+const buildings = Object.keys(buildingDefs).map(building => {
+    return { name: buildingDefs[building].name, key: building };
+});
 
-// Функция для создания шестиугольников
-function createHexagon(x, y) {
-    const hex = document.createElement("div");
-    hex.classList.add("hex");
-    hex.style.left = `${x}px`;
-    hex.style.top = `${y}px`;
+// Заполнение выпадающего списка
+buildings.forEach(building => {
+    const option = document.createElement('option');
+    option.value = building.key;
+    option.textContent = building.name;
+    buildingSelect.appendChild(option);
+});
 
-    hex.addEventListener("click", () => {
-        hex.classList.toggle("selected");
-    });
+// Обработчик события для кнопки "Рассчитать"
+document.getElementById('calculate').addEventListener('click', () => {
+    const selectedBuilding = buildingSelect.value;
+    const level = parseInt(levelInput.value);
+    const quantity = parseInt(quantityInput.value);
 
-    return hex;
-}
-
-// Создание карты шестиугольников
-for (let row = 0; row < gridHeight; row++) {
-    for (let col = 0; col < gridWidth; col++) {
-        const x = col * (hexSize * 1.5); // Учитываем ширину шестиугольника
-        const y = row * (hexSize * Math.sqrt(3)) + (col % 2) * (hexSize * (Math.sqrt(3) / 2)); // Учитываем высоту шестиугольника и смещение для четных/нечетных колонок
-        const hexagon = createHexagon(x, y);
-        gameBoard.appendChild(hexagon);
-
-        // Отладочное сообщение
-        console.log(`Hexagon created at position: (${x}, ${y})`);
+    if (!selectedBuilding) {
+        resultsDiv.textContent = "Пожалуйста, выберите здание.";
+        return;
     }
-}
 
-// Проверка на наличие шестиугольников в gameBoard
-console.log(`Total hexagons in game board: ${gameBoard.childElementCount}`);
+    const building = buildingDefs[selectedBuilding];
+
+    // Умножаем входные и выходные ресурсы на 10
+    const factor = 10;
+    const multipliedInput = multiplyResources({ [selectedBuilding]: building }, factor)[selectedBuilding].input;
+    const multipliedOutput = multiplyResources({ [selectedBuilding]: building }, factor)[selectedBuilding].output;
+
+    // Здесь можно произвести расчет необходимых ресурсов
+    let results = `Здание: ${building.name} (Уровень ${level})\n`;
+    results += `Необходимые ресурсы:\n`;
+    for (const resource in multipliedInput) {
+        results += `- ${resource}: ${multipliedInput[resource] * quantity * level}\n`;
+    }
+
+    results += `Выходные ресурсы:\n`;
+    for (const resource in multipliedOutput) {
+        results += `- ${resource}: ${multipliedOutput[resource] * quantity * level}\n`;
+    }
+
+    resultsDiv.textContent = results;
+});
